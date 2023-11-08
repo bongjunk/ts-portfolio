@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore/lite';
 import { firebase_db } from '../firebase/config';
 import { useQueryClient } from '@tanstack/react-query';
+import Posts from './components/posts';
 
 export default function Home() {
   const [value, setValue] = useState('');
-  const queryClient = useQueryClient();
 
   const dataClickHandle = async () => {
     console.log('value', value);
@@ -22,9 +22,13 @@ export default function Home() {
     <>
       <div>
         <form onSubmit={(e) => e.preventDefault()}>
-          <input onChange={(e) => setValue(e.target.value)} />
-          <button onClick={dataClickHandle}>전송 </button>
+          <input
+            className="border"
+            onChange={(e) => setValue(e.target.value)}
+          />
+          <button onClick={dataClickHandle}>전송</button>
         </form>
+        <Posts />
       </div>
     </>
   );
