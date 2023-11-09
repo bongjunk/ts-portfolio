@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore/lite';
 import { firebase_db } from '../firebase/config';
@@ -10,12 +11,15 @@ export default function Home() {
 
   const dataClickHandle = async () => {
     console.log('value', value);
-    console.log('123');
     await addDoc(collection(firebase_db, `temp`), {
-      id: '123',
+      // id: '123',
       name: 'name',
       value: value,
-    });
+    })
+      .then(() => {
+        console.log('success');
+      })
+      .catch((e) => console.log('e', e));
   };
 
   return (
