@@ -5,6 +5,7 @@ import { addDoc, collection } from 'firebase/firestore/lite';
 import { firebase_db } from '../firebase/config';
 import { useQueryClient } from '@tanstack/react-query';
 import Posts from './components/posts';
+import ListTable from './components/listTable';
 
 export default function Home() {
   const [value, setValue] = useState('');
@@ -33,6 +34,7 @@ export default function Home() {
           <button onClick={dataClickHandle}>전송</button>
         </form>
         <Posts />
+        <ListTable />
       </div>
     </>
   );
