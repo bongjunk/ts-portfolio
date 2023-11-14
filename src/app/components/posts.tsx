@@ -1,14 +1,19 @@
 import { collection, getDocs } from 'firebase/firestore/lite';
-import { firebase_db } from '@/firebase/config';
+import { firebase_db } from '@/lib/firebase/config';
 
-const Posts = async () => {
-  const getData = await getDocs(collection(firebase_db, 'temp'));
-  const snapShot = getData.docs.forEach((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+export default async function posts() {
+  try {
+    const getData = collection(firebase_db, 'temp');
+    const snapShot = await getDocs(getData);
+    const data = snapShot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    console.log('data', data);
+    return data;
+  } catch (e) {
+    console.log('error', e);
+  }
+}
 
-  return snapShot;
-};
-
-export default Posts;
+// export default posts;

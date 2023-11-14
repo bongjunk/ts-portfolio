@@ -2,9 +2,8 @@
 
 import React, { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore/lite';
-import { firebase_db } from '../firebase/config';
+import { firebase_db } from '../lib/firebase/config';
 import { useQueryClient } from '@tanstack/react-query';
-import Posts from './components/posts';
 import ListTable from './components/listTable';
 
 export default function Home() {
@@ -19,6 +18,7 @@ export default function Home() {
     })
       .then(() => {
         console.log('success');
+        setValue('');
       })
       .catch((e) => console.log('e', e));
   };
@@ -29,11 +29,11 @@ export default function Home() {
         <form onSubmit={(e) => e.preventDefault()}>
           <input
             className="border"
+            value={value}
             onChange={(e) => setValue(e.target.value)}
           />
           <button onClick={dataClickHandle}>전송</button>
         </form>
-        <Posts />
         <ListTable />
       </div>
     </>
